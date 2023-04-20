@@ -9,10 +9,16 @@ import java.util.List;
 
 public interface TeachersService {
     List<TeacherDto> getTeachers();
+
     TeacherDto getTeacherById(Long id);
+
     TeacherDto addTeacher(NewTeacherRequest teacherDto);
+
     TeacherDto updateTeacher(UpdateTeacherRequest teacherDto);
+
     TeacherDto addGroupToTeacher(Long teacherId, AddGroupRequest groupRequest);
+
     void deleteGroupFromTeacher(Long teacherId, Long groupId);
+
     void deleteTeacher(Long id);
 }

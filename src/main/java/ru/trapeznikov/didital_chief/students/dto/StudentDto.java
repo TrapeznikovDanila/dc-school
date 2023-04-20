@@ -6,7 +6,8 @@ import lombok.Setter;
 import ru.trapeznikov.didital_chief.groups.dto.ShortGroupDto;
 
 @NoArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 public class StudentDto {
     private Long id;
     private String firstName;

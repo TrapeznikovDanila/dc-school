@@ -30,20 +30,14 @@ public class StudentsServiceImpl implements StudentsService {
 
     @Override
     public List<StudentDto> getStudents() {
+        log.info("Requested a list of all students");
         return repository.findAll().stream()
                 .map(StudentsMapper::toStudentDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<StudentDto> getStudentsByGroupId(Long groupId) {
-        getGroupFromDB(groupId);
-        return repository.findByGroupId(groupId).stream()
-                .map(StudentsMapper::toStudentDto).collect(Collectors.toList());
-
-    }
-
-    @Override
     public StudentDto getStudentById(Long id) {
+        log.info(String.format("Requested information about student id=%s", id));
         return StudentsMapper.toStudentDto(getStudentFromDB(id));
     }
 
@@ -57,8 +51,9 @@ public class StudentsServiceImpl implements StudentsService {
                 .orElseThrow(() -> new NotFoundException("A suitable age group was not found",
                         LocalDateTime.now()));
         newStudent.setGroup(group);
-
-        return StudentsMapper.toStudentDto(repository.save(newStudent));
+        Student savedStudent = repository.save(newStudent);
+        log.info(String.format("Created student id=%s", savedStudent.getId()));
+        return StudentsMapper.toStudentDto(savedStudent);
     }
 
     @Override
@@ -68,7 +63,9 @@ public class StudentsServiceImpl implements StudentsService {
                 .ifPresent(student::setLastName);
         Optional.ofNullable(studentRequest.getAverageGrade())
                 .ifPresent(student::setAverageGrade);
-        return StudentsMapper.toStudentDto(repository.save(student));
+        Student updatedStudent = repository.save(student);
+        log.info(String.format("Updated student id=%s", updatedStudent.getId()));
+        return StudentsMapper.toStudentDto(updatedStudent);
     }
 
     @Override
@@ -76,13 +73,17 @@ public class StudentsServiceImpl implements StudentsService {
         Student student = getStudentFromDB(studentId);
         Group newGroup = getGroupFromDB(changeGroupRequest.getGroupId());
         student.setGroup(newGroup);
-        return StudentsMapper.toStudentDto(repository.save(student));
+        Student updatedStudent = repository.save(student);
+        log.info(String.format("For student id=%s1 group was changed on group id=%s2",
+                studentId, changeGroupRequest.getGroupId()));
+        return StudentsMapper.toStudentDto(updatedStudent);
     }
 
     @Override
     public void deleteStudent(Long id) {
         getStudentById(id);
         repository.deleteById(id);
+        log.info(String.format("Deleted student id=%s", id));
     }
 
     private Student getStudentFromDB(Long id) {

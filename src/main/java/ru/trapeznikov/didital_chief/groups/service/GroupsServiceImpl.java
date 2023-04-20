@@ -29,45 +29,52 @@ public class GroupsServiceImpl implements GroupsService {
     private final TeachersRepository teachersRepository;
 
     @Override
-    public List<GroupDto> getClasses() {
+    public List<GroupDto> getGroups() {
+        log.info("Requested a list of all groups");
         return repository.findAll().stream()
                 .map(GroupsMapper::toGroupDto).collect(Collectors.toList());
     }
 
     @Override
-    public GroupDto getClassById(Long id) {
+    public GroupDto getGroupById(Long id) {
+        log.info(String.format("Requested information about group id=%s", id));
         return GroupsMapper.toGroupDto(getGroupFromDB(id));
     }
 
     @Override
-    public GroupDto createClass(NewGroupRequest classRequest) {
-        return GroupsMapper.toGroupDto(repository.save(GroupsMapper.toGroup(classRequest)));
+    public GroupDto createGroup(NewGroupRequest classRequest) {
+        Group group = repository.save(GroupsMapper.toGroup(classRequest));
+        log.info(String.format("Created group id=%s", group.getId()));
+        return GroupsMapper.toGroupDto(group);
     }
 
     @Override
-    public GroupDto updateClass(UpdateGroupRequest classRequest) {
+    public GroupDto updateGroup(UpdateGroupRequest classRequest) {
         Group group = getGroupFromDB(classRequest.getId());
         Optional.ofNullable(classRequest.getParallelNumber()).ifPresent(group::setParallelNumber);
         Optional.ofNullable(classRequest.getLetter()).ifPresent(group::setLetter);
         Optional.ofNullable(classRequest.getStudentsAge()).ifPresent(group::setStudentsAge);
-        repository.save(group);
-
-        return GroupsMapper.toGroupDto(group);
+        Group updatedGroup = repository.save(group);
+        log.info(String.format("Updated group id=%s", updatedGroup.getId()));
+        return GroupsMapper.toGroupDto(updatedGroup);
     }
 
     @Override
-    public GroupDto addHomeroomTeacherToClass(Long groupId, AddTeacherRequest teacherRequest) {
+    public GroupDto addHomeroomTeacherToGroup(Long groupId, AddTeacherRequest teacherRequest) {
         Group group = getGroupFromDB(groupId);
         Teacher teacher = getTeacherFromDB(teacherRequest.getTeacherId());
         group.setHomeroomTeacher(teacher);
         repository.save(group);
+        log.info(String.format("Add homeroom teacher id=%s1 ti group id=%s2",
+                groupId, teacherRequest.getTeacherId()));
         return GroupsMapper.toGroupDto(group);
     }
 
     @Override
-    public void deleteClass(Long id) {
+    public void deleteGroup(Long id) {
         getGroupFromDB(id);
         repository.deleteById(id);
+        log.info(String.format("Deleted group id=%s", id));
     }
 
     private Group getGroupFromDB(Long id) {

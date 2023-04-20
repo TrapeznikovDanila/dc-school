@@ -6,11 +6,8 @@ import ru.trapeznikov.didital_chief.groups.dto.NewGroupRequest;
 import ru.trapeznikov.didital_chief.groups.dto.ShortGroupDto;
 import ru.trapeznikov.didital_chief.groups.model.Group;
 import ru.trapeznikov.didital_chief.students.service.StudentsMapper;
-import ru.trapeznikov.didital_chief.teachers.dto.TeacherDto;
-import ru.trapeznikov.didital_chief.teachers.model.Teacher;
 import ru.trapeznikov.didital_chief.teachers.service.TeacherMapper;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
@@ -45,7 +42,7 @@ public class GroupsMapper {
     }
 
     public static ShortGroupDto toShortGroupDto(Group group) {
-        ShortGroupDto shortGroupDto =new ShortGroupDto();
+        ShortGroupDto shortGroupDto = new ShortGroupDto();
         shortGroupDto.setId(group.getId());
         shortGroupDto.setParallelNumber(group.getParallelNumber());
         shortGroupDto.setLetter(group.getLetter());

@@ -9,7 +9,8 @@ import ru.trapeznikov.didital_chief.teachers.dto.ShortTeacherDto;
 import java.util.List;
 
 @NoArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 public class GroupDto {
     private Long id;
     private int parallelNumber;

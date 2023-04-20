@@ -25,9 +25,10 @@
 Тесты Postman расположены в папке 'postman' в корневой директории.
   
 ## Запуск приложения:
-1) Клонируйте репозиторий (команда: git clone https://github.com/username/repo_name.git)
-2) Сборка - mvn clean package
-2) Запуск - docker-compose up
+1) Клонируйте репозиторий (команда: git clone https://github.com/TrapeznikovDanila/dc-school.git)
+2) Откройте проект в IDE (проект разрабатывался IntelliJ IDEA)
+3) Сборка проекта командой - mvn clean package
+4) Запуск проекта командой - docker-compose up
 
 
 

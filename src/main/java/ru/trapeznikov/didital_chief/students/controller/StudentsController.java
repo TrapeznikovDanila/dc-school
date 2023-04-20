@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.trapeznikov.didital_chief.students.dto.ChangeGroupRequest;
 import ru.trapeznikov.didital_chief.students.dto.NewStudentRequest;
 import ru.trapeznikov.didital_chief.students.dto.StudentDto;
-import ru.trapeznikov.didital_chief.students.service.StudentsService;
 import ru.trapeznikov.didital_chief.students.dto.UpdateStudentRequest;
+import ru.trapeznikov.didital_chief.students.service.StudentsService;
 
 import java.util.List;
 
@@ -20,11 +20,6 @@ public class StudentsController {
     @GetMapping
     public List<StudentDto> getStudents() {
         return service.getStudents();
-    }
-
-    @GetMapping("/group/{groupId}")
-    public List<StudentDto> getStudentsByClassId(@PathVariable Long groupId) {
-        return service.getStudentsByGroupId(groupId);
     }
 
     @GetMapping("/{id}")

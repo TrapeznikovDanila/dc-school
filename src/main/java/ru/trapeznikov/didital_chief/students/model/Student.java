@@ -9,7 +9,8 @@ import ru.trapeznikov.didital_chief.groups.model.Group;
 @Entity
 @Table(name = "students")
 @NoArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

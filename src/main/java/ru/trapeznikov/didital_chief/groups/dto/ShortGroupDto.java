@@ -6,7 +6,8 @@ import lombok.Setter;
 import ru.trapeznikov.didital_chief.teachers.dto.ShortTeacherDto;
 
 @NoArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 public class ShortGroupDto {
     private Long id;
     private int parallelNumber;

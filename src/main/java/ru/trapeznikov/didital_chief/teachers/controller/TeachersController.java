@@ -3,11 +3,10 @@ package ru.trapeznikov.didital_chief.teachers.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.trapeznikov.didital_chief.teachers.dto.AddGroupRequest;
-import ru.trapeznikov.didital_chief.groups.dto.GroupDto;
 import ru.trapeznikov.didital_chief.teachers.dto.NewTeacherRequest;
 import ru.trapeznikov.didital_chief.teachers.dto.TeacherDto;
-import ru.trapeznikov.didital_chief.teachers.service.TeachersService;
 import ru.trapeznikov.didital_chief.teachers.dto.UpdateTeacherRequest;
+import ru.trapeznikov.didital_chief.teachers.service.TeachersService;
 
 import java.util.List;
 

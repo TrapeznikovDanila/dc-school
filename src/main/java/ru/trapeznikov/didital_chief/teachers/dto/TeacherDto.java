@@ -8,7 +8,8 @@ import ru.trapeznikov.didital_chief.groups.dto.ShortGroupDto;
 import java.util.List;
 
 @NoArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 public class TeacherDto {
     private Long id;
     private String firstName;

@@ -3,11 +3,10 @@ package ru.trapeznikov.didital_chief.groups.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.trapeznikov.didital_chief.groups.dto.AddTeacherRequest;
-import ru.trapeznikov.didital_chief.teachers.dto.AddGroupRequest;
-import ru.trapeznikov.didital_chief.groups.service.GroupsService;
 import ru.trapeznikov.didital_chief.groups.dto.GroupDto;
 import ru.trapeznikov.didital_chief.groups.dto.NewGroupRequest;
 import ru.trapeznikov.didital_chief.groups.dto.UpdateGroupRequest;
+import ru.trapeznikov.didital_chief.groups.service.GroupsService;
 
 import java.util.List;
 
@@ -19,32 +18,32 @@ public class GroupsController {
     private final GroupsService service;
 
     @GetMapping
-    public List<GroupDto> getClasses() {
-        return service.getClasses();
+    public List<GroupDto> getGroups() {
+        return service.getGroups();
     }
 
     @GetMapping("/{id}")
-    public GroupDto getClassById(@PathVariable Long id) {
-        return service.getClassById(id);
+    public GroupDto getGroupById(@PathVariable Long id) {
+        return service.getGroupById(id);
     }
 
     @PostMapping
-    GroupDto createClass(@RequestBody NewGroupRequest classRequest) {
-        return service.createClass(classRequest);
+    GroupDto createGroup(@RequestBody NewGroupRequest classRequest) {
+        return service.createGroup(classRequest);
     }
 
     @PatchMapping
-    public GroupDto updateClass(@RequestBody UpdateGroupRequest classRequest) {
-        return service.updateClass(classRequest);
+    public GroupDto updateGroup(@RequestBody UpdateGroupRequest classRequest) {
+        return service.updateGroup(classRequest);
     }
 
     @PostMapping("/{groupId}/homeroomTeacher")
-    public GroupDto addHomeroomTeacherToClass(@PathVariable Long groupId, @RequestBody AddTeacherRequest teacherRequest) {
-        return service.addHomeroomTeacherToClass(groupId, teacherRequest);
+    public GroupDto addHomeroomTeacherToGroup(@PathVariable Long groupId, @RequestBody AddTeacherRequest teacherRequest) {
+        return service.addHomeroomTeacherToGroup(groupId, teacherRequest);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteClass(@PathVariable Long id) {
-        service.deleteClass(id);
+    public void deleteGroup(@PathVariable Long id) {
+        service.deleteGroup(id);
     }
 }

@@ -32,18 +32,22 @@ public class TeacherServiceImpl implements TeachersService {
 
     @Override
     public List<TeacherDto> getTeachers() {
+        log.info("Requested a list of all teachers");
         return repository.findAll().stream()
                 .map(TeacherMapper::toTeacherDto).collect(Collectors.toList());
     }
 
     @Override
     public TeacherDto getTeacherById(Long id) {
+        log.info(String.format("Requested information about teacher id=%s", id));
         return TeacherMapper.toTeacherDto(getTeacherFromDB(id));
     }
 
     @Override
     public TeacherDto addTeacher(NewTeacherRequest teacherDto) {
-        return TeacherMapper.toTeacherDto(repository.save(TeacherMapper.toTeacher(teacherDto)));
+        Teacher teacher = repository.save(TeacherMapper.toTeacher(teacherDto));
+        log.info(String.format("Created teacher id=%s", teacher.getId()));
+        return TeacherMapper.toTeacherDto(teacher);
     }
 
     @Override
@@ -51,7 +55,9 @@ public class TeacherServiceImpl implements TeachersService {
         Teacher teacher = getTeacherFromDB(teacherDto.getId());
         Optional.ofNullable(teacherDto.getLastName()).ifPresent(teacher::setLastName);
         Optional.ofNullable(teacherDto.getSpecialization()).ifPresent(teacher::setSpecialization);
-        return TeacherMapper.toTeacherDto(repository.save(teacher));
+        Teacher updatedTeacher = repository.save(teacher);
+        log.info(String.format("Updated teacher id=%s", updatedTeacher.getId()));
+        return TeacherMapper.toTeacherDto(updatedTeacher);
     }
 
     @Override
@@ -65,7 +71,8 @@ public class TeacherServiceImpl implements TeachersService {
         groups.add(group);
         teacher.setGroups(groups);
         repository.save(teacher);
-
+        log.info(String.format("Group id=%s1 was added to teacher id=%s2",
+                groupRequest.getGroupId(), teacherId));
         return TeacherMapper.toTeacherDto(teacher);
     }
 
@@ -77,6 +84,8 @@ public class TeacherServiceImpl implements TeachersService {
         groups.remove(group);
         teacher.setGroups(groups);
         repository.save(teacher);
+        log.info(String.format("Group id=%s1 was deleted from teacher id=%s2",
+                groupId, teacherId));
     }
 
     @Override
@@ -87,6 +96,7 @@ public class TeacherServiceImpl implements TeachersService {
                     LocalDateTime.now());
         }
         repository.deleteById(id);
+        log.info(String.format("Deleted teacher id=%s", id));
     }
 
     private Teacher getTeacherFromDB(Long id) {
