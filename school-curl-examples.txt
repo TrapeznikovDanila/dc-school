@@ -1,0 +1,105 @@
+# Создать новую группу(класс)
+curl --location 'localhost:8080/groups' \
+--header 'Content-Type: application/json' \
+--data '{
+    "parallelNumber": 2,
+    "letter": "A",
+    "studentsAge": 8
+    }'
+
+# Обновить информацию о группе(классе)
+curl --location --request PATCH 'localhost:8080/groups' \
+--header 'Content-Type: application/json' \
+--data '{
+    "id": 1,
+    "parallelNumber": 1,
+    "letter": "B",
+    "studentsAge": 7
+    }'
+
+# Получить список всех групп(классов)
+curl --location 'localhost:8080/groups'
+
+# Получить группу(класс) по id
+curl --location 'localhost:8080/groups/1'
+
+# Удалить группу(класс) по id
+curl --location --request DELETE 'localhost:8080/groups/1'
+
+# Добавить(создать) нового учителя
+curl --location 'localhost:8080/teachers' \
+--header 'Content-Type: application/json' \
+--data '{
+    "firstName": "Name",
+    "lastName": "Lastname",
+    "age": 30,
+    "specialization": "Specialization"
+    }'
+
+# Получить список всех учителей
+curl --location 'localhost:8080/teachers'
+
+# Получить учителя по id
+curl --location 'localhost:8080/teachers/1'
+
+# Обновить информацию об учителе
+curl --location --request PATCH 'localhost:8080/teachers' \
+--header 'Content-Type: application/json' \
+--data '{
+    "id": 1,
+    "lastName": "NewLastName",
+    "specialization": "New Specialization"
+    }'
+
+# Добавить группу в список групп, в которых преподает учитель
+curl --location 'localhost:8080/teachers/1/group' \
+--header 'Content-Type: application/json' \
+--data '{
+    "groupId": 1
+    }'
+
+# Назначить классного руководителя для группы
+curl --location 'localhost:8080/groups/3/homeroomTeacher' \
+--header 'Content-Type: application/json' \
+--data '{
+    "teacherId": 2
+    }'
+
+# Удалить группу из списка групп, в которых преподает учитель
+curl --location --request DELETE 'localhost:8080/teachers/1/group/1'
+
+# Удалить учителя из приложения
+curl --location --request DELETE 'localhost:8080/teachers/1'
+
+# Добавить(создать) нового ученика
+curl --location 'localhost:8080/students' \
+--header 'Content-Type: application/json' \
+--data '{
+    "firstName": "Student1",
+    "lastName": "Lastname",
+    "age": 7
+    }'
+
+# Обновить информацию об ученике
+curl --location --request PATCH 'localhost:8080/students' \
+--header 'Content-Type: application/json' \
+--data '{
+    "id": 1,
+    "lastName": "NewLastname"
+    }'
+
+# Получить список всех учеников
+curl --location 'localhost:8080/students'
+
+# Получить ученика по id
+curl --location 'localhost:8080/students/1'
+
+# Перевести ученика в другую группу
+curl --location --request PATCH 'localhost:8080/students/1/group' \
+--header 'Content-Type: application/json' \
+--data '{
+    "groupId": 1
+    }'
+
+# Удалить ученика из приложения
+curl --location --request DELETE 'localhost:8080/students/1'
