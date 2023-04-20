@@ -22,7 +22,7 @@
  - 'spring-boot-starter-test' - стартовый пакет Spring Boot для тестирования приложений.
 
 Примеры запросов к эндпоинтам находятся в корневой директории в файле 'school-curl-examples.txt'.
-Тесты Postman расположены в папке 'postman' в корневой директории.
+Тесты Postman расположены в папке 'postman' в корневой директории. Ссылка - https://github.com/TrapeznikovDanila/dc-school/blob/master/postman/school.postman_collection.json
 Схема базы данных находится в файле 'dc-school-database-schema.pdf', файл расположен в корневой директории. Ссылка - https://github.com/TrapeznikovDanila/dc-school/blob/master/dc-school-database-schema.pdf
   
 ## Запуск приложения:
